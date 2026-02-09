@@ -1,3 +1,45 @@
+
+:root {
+  /* Core */
+  --color-dark: #222222;
+  --color-black: #000000;
+  --color-primary: #5682B1;
+  --color-secondary: #739EC9;
+
+  /* Neutrals */
+  --color-white: #ffffff;
+  --color-light: #f5f7fa;
+  --color-muted: #9aa4af;
+  --color-border: #e2e6ea;
+
+  /* Dark surfaces */
+  --color-dark-soft: #2c2c2c;
+  --color-dark-muted: #3a3a3a;
+
+  /* Primary scale */
+  --color-primary-light: #8fb1d6;
+  --color-primary-dark: #3f648f;
+
+  /* Secondary scale */
+  --color-secondary-light: #a7c3e1;
+  --color-secondary-dark: #567fa7;
+
+  /* Accent (trust / verified / neutral-positive) */
+  --color-success: #4caf50;
+  --color-success-soft: #e8f5e9;
+
+  /* Warning (subtle, not aggressive) */
+  --color-warning: #d4a373;
+  --color-warning-soft: #fff3e6;
+
+  /* Error (kept calm, not red-red) */
+  --color-danger: #c55353;
+  --color-danger-soft: #fdeaea;
+
+  /* Focus / outline */
+  --color-focus: #90b4e5;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,7 +49,81 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+section > .container-fluid, footer > .container-fluid{
+  padding:6% 5%;
+}
+
+/* nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav */
+nav{
+  text-transform: capitalize;
+}
+
+.navbar-brand {
+    width: 20%;
+}
+
+@media (max-width:750px) {
+    .navbar-brand {
+        width: 40%;
+    }
+}
+nav .container-fluid{
+  padding:0 5% ;
+}
+
+.nav-link{
+  line-height: 50px;
+}
+
+/* buttons--buttons--buttons--buttons--buttons--buttons--buttons--buttons--buttons--buttons */
+
+.btn{
+  text-transform: capitalize;
+   white-space: nowrap;
+   margin-right: 10px;
+} 
+ 
+.btnPrimary{
+  color: white;
+  background:var(--color-primary)
+}
+.btnDark{
+  color:white;
+  background-color: var(--color-dark);
+}
+.btn-dark{
+  border: solid 1px white;
+}
+
+
+/* homepage--homepage--homepage--homepage--homepage--homepage--homepage--homepage--homepage */
+#header-section {
+  background-color: var(--color-dark);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  min-height: 80vh;
+}
+
+
+#header-section > svg {
+  display: block;
+  width: 100%;
+  height:120px;
+  position: absolute;
+  bottom:0;
+  transform: scaleY(-1);
+  
+}
+
+#feature-section h2, #feature-section h6{
+  text-align: center;
 }
