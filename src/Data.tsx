@@ -1,6 +1,7 @@
 import {GlobalOutlined,
    CheckCircleOutlined,
-    SearchOutlined, RobotOutlined, RocketOutlined, AppstoreOutlined} from '@ant-design/icons'
+    SearchOutlined, RobotOutlined, RocketOutlined, AppstoreOutlined,
+  SafetyOutlined,AimOutlined, DeploymentUnitOutlined} from '@ant-design/icons'
 
 const Styles = {
   fontSize:'22px', padding:'15px',color:'white',marginBottom:'5px',
@@ -50,3 +51,23 @@ export const homeFeatures =[
     "color":"#3a3a3a"
   }
 ]
+
+export const homeAdvantage = [
+  {
+    "title": "Trusted Reference",
+    "description": "Open and neutral platform that serves as a reliable reference for users, search engines, and AI systems worldwide."
+  },
+  {
+    "title": "Verification Badge",
+    "description": "Earn the exclusive Execution Verified badge that confirms work was directly executed and delivery-verified by The Great List."
+  },
+  {
+    "title": "No Endorsements",
+    "description": "Neutral listings without bias. We don't endorse businesses or place our branding on external websites—just pure visibility."
+  },
+  {
+    "title": "Maximum Reach",
+    "description": "Your listing is accessible to all—users searching online, search engine crawlers, and AI-powered assistants discovering businesses."
+  }
+]
+

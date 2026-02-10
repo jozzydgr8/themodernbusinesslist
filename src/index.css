@@ -40,6 +40,30 @@
   --color-focus: #90b4e5;
 }
 
+/* animation animation animation animation animation animation */
+.sectionAnimationLeft{
+  scroll-behavior: smooth;
+  animation: backInLeft;
+  animation-duration: 1.5s;
+}
+.sectionAnimationDown{
+  scroll-behavior: smooth;
+  animation:fadeInDownBig;
+  animation-duration: 1.2s;
+}
+
+.sectionAnimationUp{
+  scroll-behavior: smooth;
+  animation:fadeInUpBig;
+  animation-duration: 1.2s;
+
+}
+.sectionAnimationRight{
+  scroll-behavior: smooth;
+  animation: backInRight;
+  animation-duration: 1.2s;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -58,7 +82,7 @@ body {
 
 
 section > .container-fluid, footer > .container-fluid{
-  padding:6% 5%;
+  padding:10% 5%;
 }
 
 /* nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav */
@@ -106,11 +130,12 @@ nav .container-fluid{
 
 /* homepage--homepage--homepage--homepage--homepage--homepage--homepage--homepage--homepage */
 #header-section {
-  background-color: var(--color-dark);
+  background-image: url('./assets/headerbackground.jpg');
   color: white;
   position: relative;
   overflow: hidden;
-  min-height: 80vh;
+  min-height: 60vh;
+   display: flex;
 }
 
 
@@ -123,7 +148,20 @@ nav .container-fluid{
   transform: scaleY(-1);
   
 }
+#header-section .header-badge{
+  border: solid 1px white;
+  padding: 10px 30px;
+  border-radius: 20px;
+  color: var(--color-focus);
+}
 
+/* #feature --feature */
 #feature-section h2, #feature-section h6{
   text-align: center;
+}
+
+#feature-section .feature-cta{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

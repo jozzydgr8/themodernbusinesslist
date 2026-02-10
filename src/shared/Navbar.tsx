@@ -33,7 +33,7 @@ export const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink to={``} className="nav-link">
-                <FlatButton title='list your business' className='btn btnDark '/>
+                <FlatButton title='list your business' className='btn btnPrimary '/>
               </NavLink>
             </li>
 

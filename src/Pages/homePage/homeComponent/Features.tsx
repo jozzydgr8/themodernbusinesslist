@@ -1,4 +1,6 @@
 import { homeFeatures } from "../../../Data"
+import { FlatButton } from "../../../shared/FlatButton"
+import {PlusOutlined} from '@ant-design/icons'
 
 export const Features = ()=>{
     return(
@@ -14,7 +16,7 @@ export const Features = ()=>{
                     {
                         homeFeatures.map((features, index)=>(
                             <>
-                            <div className="col-md-4" key={index} style={{marginBottom:"40px"}}>
+                            <div className="col-md-4 animate-up" key={index} style={{marginBottom:"40px"}}>
                                 <div style={{minHeight:'350px',boxShadow: `0 -4px 6px -1px ${features.color}`, padding:"45px", borderRadius:'20px', background:'#e2e6ea'}}>
                                     {features.icon}
                                     <br/>
@@ -30,6 +32,10 @@ export const Features = ()=>{
                             
                         ))
                     }
+                </div>
+                <div className="feature-cta animate-up">
+                    <p>Ready to get Listed?</p>
+                    <FlatButton className="btn btn-lg btnPrimary" icon={<PlusOutlined/>} title="List Your Business Now"/>
                 </div>
             </div>
         </section>
