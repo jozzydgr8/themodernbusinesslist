@@ -1,3 +1,4 @@
+import { Advantage } from "./homeComponent/Advantage"
 import { Features } from "./homeComponent/Features"
 import { Header } from "./homeComponent/Header"
 
@@ -7,6 +8,7 @@ export const Home =()=>{
         <>
         <Header/>
         <Features/>
+        <Advantage/>
       
         </>
     )

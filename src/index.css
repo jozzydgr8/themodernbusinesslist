@@ -119,6 +119,10 @@ nav .container-fluid{
   color: white;
   background:var(--color-primary)
 }
+.btnSuccess{
+  color: white;
+  background-color: var(--color-success);
+}
 .btnDark{
   color:white;
   background-color: var(--color-dark);
@@ -153,6 +157,7 @@ nav .container-fluid{
   padding: 10px 30px;
   border-radius: 20px;
   color: var(--color-focus);
+  font-weight: bold;
 }
 
 /* #feature --feature */
@@ -164,4 +169,18 @@ nav .container-fluid{
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+/* //advabtage--advantage */
+#advantage-section{
+  background: var(--color-black);
+  color: var(--color-light);
+}
+#advantage-section .advantage-badge{
+  border: solid 1px white;
+  padding: 10px 30px;
+  border-radius: 20px;
+  color: var(--color-success);
+  text-transform: uppercase;
+  font-weight: bold;
 }
