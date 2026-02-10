@@ -1,7 +1,8 @@
 import {GlobalOutlined,
    CheckCircleOutlined,
     SearchOutlined, RobotOutlined, RocketOutlined, AppstoreOutlined,
-  SafetyOutlined,AimOutlined, DeploymentUnitOutlined, FileDoneOutlined,LineChartOutlined} from '@ant-design/icons'
+  SafetyOutlined,AimOutlined, DeploymentUnitOutlined, FileDoneOutlined,LineChartOutlined,
+UnlockOutlined, SyncOutlined} from '@ant-design/icons'
 
 const Styles = {
   fontSize:'22px', padding:'15px',color:'white',marginBottom:'5px',
@@ -79,25 +80,43 @@ export const homeAdvantage = [
 
 export const homeProcess =[
   {
-    "icon":<FileDoneOutlined style={{...Styles,color:'#739EC9'}}/>,
+    "icon":<FileDoneOutlined style={{...Styles,color:'#739EC9', background:'#e2e6ea'}}/>,
     "color":"#739EC9",
     "step": "01",
     "title": "Submit Your Info",
     "description": "Fill out a simple form with your business details, including company name, description, services, and contact information."
   },
   {
-    "icon":<CheckCircleOutlined style={{...Styles,color:'#5682B1'}}/>,
+    "icon":<CheckCircleOutlined style={{...Styles,color:'#5682B1', background:'#e2e6ea'}}/>,
     "color":"#5682B1",
     "step": "02",
     "title": "We Review & Publish",
     "description": "Our team reviews your submission to ensure quality and accuracy, then publishes your listing to the directory."
   },
   {
-    "icon":<LineChartOutlined style={{...Styles,background:'#4caf50'}}/>,
+    "icon":<LineChartOutlined style={{...Styles,color:'#4caf50', background:'#e2e6ea'}}/>,
     "color":"#4caf50",
     "step": "03",
     "title": "Get Discovered",
     "description": "Your business is now visible to users, search engines, and AI systems. Watch your online presence grow organically."
+  }
+]
+
+export const homeOffering =[
+  {
+    "icon":<CheckCircleOutlined style={{...Styles,color:'white', background:'#4caf50'}}/>,
+    "title": "Execution Verified Badge",
+    "description": "Projects that were directly executed and delivery-verified receive our exclusive badge"
+  },
+  {
+     "icon":<SyncOutlined style={{...Styles,color:'white', background:'#5682B1'}}/>,
+    "title": "Permanent Listing",
+    "description": "Your company profile remains active indefinitely for continuous visibility"
+  },
+  {
+    "icon":<UnlockOutlined style={{...Styles,color:'white', background:'#739EC9'}}/>,
+    "title": "Open Access",
+    "description": "No paywalls or hidden fees—your listing is accessible to everyone searching"
   }
 ]
 

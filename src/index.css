@@ -82,7 +82,7 @@ body {
 
 
 section > .container-fluid, footer > .container-fluid{
-  padding:10% 5%;
+  padding:10% 7%;
 }
 
 /* nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav--nav */
@@ -100,7 +100,7 @@ nav{
     }
 }
 nav .container-fluid{
-  padding:0 5% ;
+  padding:0 7% ;
 }
 
 .nav-link{
@@ -138,7 +138,7 @@ nav .container-fluid{
   color: white;
   position: relative;
   overflow: hidden;
-  min-height: 60vh;
+  min-height: 70vh;
    display: flex;
 }
 
@@ -183,4 +183,25 @@ nav .container-fluid{
   color: var(--color-success);
   text-transform: uppercase;
   font-weight: bold;
+}
+
+/* --process--process */
+#home-process{
+  text-align: center;
+}
+#home-process .process-content{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+  border: solid 1px #e2e6ea;
+  border-radius: 20px;
+  min-height: 450px;
+}
+#home-process .offering-container{
+  background-color: var(--color-border);
+  padding: 55px 40px;
+  border-radius: 20px;
 }
