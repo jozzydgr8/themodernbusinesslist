@@ -205,3 +205,10 @@ nav .container-fluid{
   padding: 55px 40px;
   border-radius: 20px;
 }
+
+
+/* footer---footer--footer */
+footer{
+  background-color: var(--color-black);
+  color: white;
+}
