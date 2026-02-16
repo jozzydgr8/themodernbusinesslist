@@ -80,6 +80,11 @@ body {
     box-sizing: border-box;
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
 
 section > .container-fluid, footer > .container-fluid{
   padding:10% 7%;
