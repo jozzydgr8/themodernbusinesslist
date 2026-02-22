@@ -22,10 +22,20 @@ export type StateType = {
 };
 
 //business categories
+export type SubCategoryType = {
+  _id: string;
+  name: string;
+  categoryId: string;
+  businessCount?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type BusinessCategory = {
   _id: string;
   name: string;
   businessCount: number;
-  createdAt: Date;
-  updatedAt: Date;
-};
+  createdAt: string;
+  updatedAt: string;
+  subCategories: SubCategoryType[];
+}

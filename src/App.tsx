@@ -5,6 +5,7 @@ import { Home } from './Pages/homePage/Home';
 import { useEffect } from 'react';
 import { UseDataContext } from './context/UseDataContext';
 import { Loading } from './shared/Loading';
+import { BrowseCategory } from './Pages/BrowseCategoryPage/BrowseCategory';
 
 function App() {
   const {loading, dispatch} = UseDataContext();
@@ -62,27 +63,33 @@ function App() {
 
 }, []);
   //fetch categories
-  // useEffect(()=>{
-  //   dispatch({type:'setloading',payload:true})
-  //   const getCategories = async ()=>{
-  //     try{
-  //       const categoryRes = await fetch('https://modernbusinesslistserver.vercel.app/categories');
-  //       if(!categoryRes.ok){
-  //         throw Error ('error fetching categories')
-  //       }
+  useEffect(()=>{
+    dispatch({type:'setloading',payload:true})
+    const getCategories = async ()=>{
+      try{
+        const cachedCategory = localStorage.getItem('modernbusinesslistcategory');
+        if(cachedCategory){
+          dispatch({type:'getbusinesscategory',payload:JSON.parse(cachedCategory)});
+          return;
+        }
+        const categoryRes = await fetch('https://modernbusinesslistserver.vercel.app/categories/withSubCategories');
+        if(!categoryRes.ok){
+          throw Error ('error fetching categories')
+        }
 
-  //     const json = await categoryRes.json();
-  //     console.log(json)
-  //     dispatch({type:'getbusinesscategory',payload:json})
+      const json = await categoryRes.json();
+      console.log(json)
+      localStorage.setItem('modernbusinesslistcategory',JSON.stringify(json))
+      dispatch({type:'getbusinesscategory',payload:json})
 
-  //     }catch(error){
-  //       console.error(error instanceof Error ? error.message : String(error));
-  //     }finally{
-  //       dispatch({type:'setloading',payload:false})
-  //     }
-  //   }
-  //   getCategories()
-  // },[])
+      }catch(error){
+        console.error(error instanceof Error ? error.message : String(error));
+      }finally{
+        dispatch({type:'setloading',payload:false})
+      }
+    }
+    getCategories()
+  },[])
   //animation
   useEffect(()=>{
     const animation = ()=>{
@@ -137,6 +144,7 @@ function App() {
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
       <Route index element={<Home/>} />
+      <Route path='categories' element={<BrowseCategory/>}/>
 
     </Route>
   ))

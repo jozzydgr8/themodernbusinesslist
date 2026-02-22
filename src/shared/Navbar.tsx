@@ -32,6 +32,11 @@ export const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink to={`/categories`} className="nav-link active">
+                    Categories
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink to={``} className="nav-link">
                 <FlatButton title='list your business' className='btn btnPrimary '/>
               </NavLink>
