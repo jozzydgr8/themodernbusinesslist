@@ -62,27 +62,27 @@ function App() {
 
 }, []);
   //fetch categories
-  useEffect(()=>{
-    dispatch({type:'setloading',payload:true})
-    const getCategories = async ()=>{
-      try{
-        const categoryRes = await fetch('https://modernbusinesslistserver.vercel.app/categories');
-        if(!categoryRes.ok){
-          throw Error ('error fetching categories')
-        }
+  // useEffect(()=>{
+  //   dispatch({type:'setloading',payload:true})
+  //   const getCategories = async ()=>{
+  //     try{
+  //       const categoryRes = await fetch('https://modernbusinesslistserver.vercel.app/categories');
+  //       if(!categoryRes.ok){
+  //         throw Error ('error fetching categories')
+  //       }
 
-      const json = await categoryRes.json();
-      console.log(json)
-      dispatch({type:'getbusinesscategory',payload:json})
+  //     const json = await categoryRes.json();
+  //     console.log(json)
+  //     dispatch({type:'getbusinesscategory',payload:json})
 
-      }catch(error){
-        console.error(error instanceof Error ? error.message : String(error));
-      }finally{
-        dispatch({type:'setloading',payload:false})
-      }
-    }
-    getCategories()
-  },[])
+  //     }catch(error){
+  //       console.error(error instanceof Error ? error.message : String(error));
+  //     }finally{
+  //       dispatch({type:'setloading',payload:false})
+  //     }
+  //   }
+  //   getCategories()
+  // },[])
   //animation
   useEffect(()=>{
     const animation = ()=>{
