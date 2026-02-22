@@ -16,7 +16,7 @@ function App() {
     try {
       let countryId;
 
-      const cachedId = localStorage.getItem("country");
+      const cachedId = localStorage.getItem("businesslistcountry");
 
       if (cachedId) {
         countryId = JSON.parse(cachedId);
@@ -36,7 +36,7 @@ function App() {
         countryId = fetchedCountryId;
 
         // cache it
-        localStorage.setItem("country", JSON.stringify(countryId));
+        localStorage.setItem("businesslistcountry", JSON.stringify(countryId));
       }
 
       // fetch states
@@ -54,7 +54,6 @@ function App() {
     } catch (error) {
       console.error(error instanceof Error ? error.message : String(error));
     } finally {
-      // ✅ Only set loading false after everything finishes
       dispatch({ type: "setloading", payload: false });
     }
   };
@@ -62,6 +61,28 @@ function App() {
   getCountry();
 
 }, []);
+  //fetch categories
+  useEffect(()=>{
+    dispatch({type:'setloading',payload:true})
+    const getCategories = async ()=>{
+      try{
+        const categoryRes = await fetch('https://modernbusinesslistserver.vercel.app/categories');
+        if(!categoryRes.ok){
+          throw Error ('error fetching categories')
+        }
+
+      const json = await categoryRes.json();
+      console.log(json)
+      dispatch({type:'getbusinesscategory',payload:json})
+
+      }catch(error){
+        console.error(error instanceof Error ? error.message : String(error));
+      }finally{
+        dispatch({type:'setloading',payload:false})
+      }
+    }
+    getCategories()
+  },[])
   //animation
   useEffect(()=>{
     const animation = ()=>{

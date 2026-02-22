@@ -20,3 +20,12 @@ export type StateType = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+//business categories
+export type BusinessCategory = {
+  _id: string;
+  name: string;
+  businessCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+};
