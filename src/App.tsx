@@ -69,9 +69,9 @@ function App() {
       try{
         let cachedCategory = null;
 
-        if (typeof window !== "undefined") {
+       
         cachedCategory = localStorage.getItem('modernbusinesslistcategory');
-        }
+        
         if(cachedCategory){
           dispatch({type:'getbusinesscategory',payload:JSON.parse(cachedCategory)});
           return;
@@ -83,12 +83,12 @@ function App() {
 
       const json = await categoryRes.json();
       console.log(json)
-      if (typeof window !== "undefined") {
+   
         localStorage.setItem(
           'modernbusinesslistcategory',
           JSON.stringify(json)
         );
-      }
+      
       dispatch({type:'getbusinesscategory',payload:json})
 
       }catch(error){
