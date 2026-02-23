@@ -61,7 +61,7 @@ function App() {
 
   getCountry();
 
-}, []);
+}, [dispatch]);
   //fetch categories
   useEffect(()=>{
     dispatch({type:'setloading',payload:true})
@@ -98,7 +98,7 @@ function App() {
       }
     }
     getCategories()
-  },[])
+  },[dispatch])
   //animation
   useEffect(()=>{
     const animation = ()=>{
