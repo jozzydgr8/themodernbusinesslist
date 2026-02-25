@@ -1,9 +1,10 @@
+import { NavLink } from "react-router-dom"
 import { UseDataContext } from "../../../context/UseDataContext"
 
 export const CategoryListing = ()=>{
     const {businessCategory} = UseDataContext()
     return(
-        <section>
+        <section id='category-listing'>
             <div className="container-fluid">
                 {
                     businessCategory?.map(cat=>(
@@ -12,12 +13,16 @@ export const CategoryListing = ()=>{
                             <div className="row">
                                 {
                                 cat.subCategories.map(sub=>(
-                                    <div className="col-md-4" key={sub._id}>
-                                        <div>
+                                    <NavLink to={'/'} className="col-md-4 col-sm-6 col-xs-12" key={sub._id}>
+                                        <div className='container-listing'>
                                         <div>{sub.name}</div>
-                                        <div>{sub.businessCount}</div>
+                                        <div className="container-listing-count">
+                                            <div>
+                                                {sub.businessCount}
+                                            </div>
                                         </div>
-                                    </div>
+                                        </div>
+                                    </NavLink>
                                 ))
                             }
                             </div>

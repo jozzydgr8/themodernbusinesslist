@@ -28,6 +28,11 @@ export const Navbar = () => {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <NavLink to={`/`} className="nav-link active">
+                    Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/`} className="nav-link active">
                     Sign In
               </NavLink>
             </li>

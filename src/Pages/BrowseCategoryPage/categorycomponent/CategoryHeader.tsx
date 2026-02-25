@@ -1,6 +1,6 @@
 export const CategoryHeader = ()=>{
     return(
-        <section>
+        <section id='category-header'>
             <div className="container-fluid">
                 <h2>
                     Find business by category

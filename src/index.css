@@ -145,6 +145,7 @@ nav .container-fluid{
   overflow: hidden;
   min-height: 100vh;
    display: flex;
+   padding-top: 5%;
 }
 
 
@@ -178,7 +179,7 @@ nav .container-fluid{
 
 /* //advabtage--advantage */
 #advantage-section{
-  background: var(--color-black);
+  background: var(--color-dark-soft);
   color: var(--color-light);
 }
 #advantage-section .advantage-badge{
@@ -219,6 +220,47 @@ footer{
 }
 footer img{
   width: 60%;
+  background-color: var(--color-light);
+  margin-bottom:10px ;
+}
+
+
+
+
+/* //category category //category */
+#category-header h2{
+  color: var(--color-light);
+  background-color: var(--color-primary-dark);
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
+}
+#category-listing h3{
+  color: var(--color-primary);
+}
+#category-listing .container-listing{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: solid 0.2px var(--color-border);
+  outline: none;
+  border-radius: 80px;
+  margin-bottom: 20px;
+  align-items: center;
+  padding-left: 10px;
+}
+#category-listing .container-listing:hover{
+  border: solid 1.5px var(--color-muted);
+  cursor: pointer;
+
+}
+
+.container-listing .container-listing-count{
+  background: var(--color-border);
+  border-bottom-right-radius: 100%;
+  border-top-right-radius: 100%;
+  padding: 10px 20px;
+  margin:0
 }
 
 
