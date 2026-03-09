@@ -32,7 +32,7 @@ export const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to={`/`} className="nav-link active">
+              <NavLink to={`/session`} className="nav-link active">
                     Sign In
               </NavLink>
             </li>

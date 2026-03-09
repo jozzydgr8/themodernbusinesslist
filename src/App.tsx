@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { UseDataContext } from './context/UseDataContext';
 import { Loading } from './shared/Loading';
 import { BrowseCategory } from './Pages/BrowseCategoryPage/BrowseCategory';
+import { Session } from './Pages/session/Session';
 
 function App() {
   const {loading, dispatch} = UseDataContext();
@@ -63,42 +64,59 @@ function App() {
 
 }, [dispatch]);
   //fetch categories
-  useEffect(()=>{
-    dispatch({type:'setloading',payload:true})
-    const getCategories = async ()=>{
-      try{
-        let cachedCategory = null;
+useEffect(() => {
+  dispatch({ type: "setloading", payload: true });
 
-       
-        cachedCategory = localStorage.getItem('modernbusinesslistcategory');
-        
-        if(cachedCategory){
-          dispatch({type:'getbusinesscategory',payload:JSON.parse(cachedCategory)});
+  const getCategories = async () => {
+    try {
+      const CACHE_KEY = "modernbusinesslistcategory";
+      const CACHE_TIME = 5 * 60 * 1000; // 5 minutes
+
+      const cached = localStorage.getItem(CACHE_KEY);
+
+      if (cached) {
+        const parsed = JSON.parse(cached);
+
+        const now = Date.now();
+
+        if (now - parsed.timestamp < CACHE_TIME) {
+          dispatch({
+            type: "getbusinesscategory",
+            payload: parsed.data,
+          });
           return;
         }
-        const categoryRes = await fetch('https://modernbusinesslistserver.vercel.app/categories/withSubCategories');
-        if(!categoryRes.ok){
-          throw Error ('error fetching categories')
-        }
-
-      const json = await categoryRes.json();
-      console.log(json)
-   
-        localStorage.setItem(
-          'modernbusinesslistcategory',
-          JSON.stringify(json)
-        );
-      
-      dispatch({type:'getbusinesscategory',payload:json})
-
-      }catch(error){
-        console.error(error instanceof Error ? error.message : String(error));
-      }finally{
-        dispatch({type:'setloading',payload:false})
       }
+
+      const res = await fetch(
+        "https://modernbusinesslistserver.vercel.app/categories/withSubCategories"
+      );
+
+      if (!res.ok) {
+        throw new Error("error fetching categories");
+      }
+
+      const json = await res.json();
+
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({
+          data: json,
+          timestamp: Date.now(),
+        })
+      );
+
+      dispatch({ type: "getbusinesscategory", payload: json });
+
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      dispatch({ type: "setloading", payload: false });
     }
-    getCategories()
-  },[dispatch])
+  };
+
+  getCategories();
+}, [dispatch]);
   //animation
   useEffect(()=>{
     const animation = ()=>{
@@ -154,6 +172,7 @@ function App() {
     <Route path='/' element={<Layout/>}>
       <Route index element={<Home/>} />
       <Route path='categories' element={<BrowseCategory/>}/>
+      <Route path='session' element={<Session/>}/>
 
     </Route>
   ))
