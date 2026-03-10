@@ -44,3 +44,9 @@ export type User = {
   email:string,
   token:string
 }
+
+export type sessionProps={
+    email:string,
+    password:string,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+}

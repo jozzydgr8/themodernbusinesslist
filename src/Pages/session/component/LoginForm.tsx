@@ -3,9 +3,11 @@ import { Formik } from "formik"
 import { CloseOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { FlatButton } from "../../../shared/FlatButton";
+import { useState } from "react";
 
 export const LoginForm = ()=>{
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     return(
         <Formik 
             initialValues={{
@@ -47,7 +49,7 @@ export const LoginForm = ()=>{
                             onChange={formik.handleChange}/>
                         </Form.Item>
 
-                        <FlatButton title="submit" onClick={()=>formik.handleSubmit()} className="btn btnPrimary"/>
+                        <FlatButton title="submit" onClick={()=>formik.handleSubmit()} className="btn btnPrimary" disabled={loading}/>
                     </Form>
                 </div>
                 )
