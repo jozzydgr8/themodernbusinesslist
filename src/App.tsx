@@ -4,12 +4,16 @@ import { Layout } from './Layout';
 import { Home } from './Pages/homePage/Home';
 import { useEffect } from 'react';
 import { UseDataContext } from './context/UseDataContext';
+import { UseAuthContext } from './context/UseAuthContext';
 import { Loading } from './shared/Loading';
 import { BrowseCategory } from './Pages/BrowseCategoryPage/BrowseCategory';
 import { Session } from './Pages/session/Session';
 
 function App() {
   const {loading, dispatch} = UseDataContext();
+  const {user, dispatch:userDispatch, loading:userLoading} = UseAuthContext();
+
+  //useEffect for authentication
   //fetch or check country
  useEffect(() => {
   dispatch({type:'setloading', payload:true});

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { CreateAcctForm } from "./component/CreateAcctForm";
 import { LoginForm } from "./component/LoginForm";
 import { FlatButton } from "../../shared/FlatButton";
+import businessLogo from '../../assets/businessLogo.png';
 
 export const Session = ()=>{
     const [newUser, setNewUser] = useState(false);
@@ -23,11 +24,14 @@ export const Session = ()=>{
             borderRadius: "10px",
             height:'100vh'
           }}>
-        <FlatButton onClick={()=>setNewUser(!newUser)} title={newUser ? 'Login if you have an account':'create new account'}/>
-    
+        
+       
+            <img src={businessLogo} alt="themodernlist logo" style={{width:"20%"}}/>
+        
         {
             newUser ? <CreateAcctForm/> : <LoginForm/>
         }
+        <FlatButton onClick={()=>setNewUser(!newUser)} title={newUser ? 'click to login if you have an account':'click to create account'} className="btnBare"/>
         </div>
     )
 }

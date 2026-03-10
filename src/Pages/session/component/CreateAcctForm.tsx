@@ -2,6 +2,7 @@ import { Form, Input } from "antd"
 import { Formik } from "formik"
 import { CloseOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
+import { FlatButton } from "../../../shared/FlatButton";
 
 export const CreateAcctForm = ()=>{
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ export const CreateAcctForm = ()=>{
                         </div>
                         <h3>Create Account</h3>
                         <Form layout="vertical" onFinish={formik.handleSubmit}>
-                            <Form.Item label='email'>
+                            <Form.Item label='Email'>
                                 <Input
                                 name="email"
                                 value={formik.values.email}
@@ -38,12 +39,14 @@ export const CreateAcctForm = ()=>{
                                 required/>
                             </Form.Item>
 
-                            <Form.Item>
-                                <Input
+                            <Form.Item label='Password'>
+                                <Input.Password
                                 name="password"
                                 value={formik.values.password}
                                 onChange={formik.handleChange}/>
                             </Form.Item>
+
+                            <FlatButton title="submit" onClick={()=>formik.handleSubmit()} className="btn btnPrimary"/>
                         </Form>
                         </div>
                     )

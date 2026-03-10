@@ -39,3 +39,8 @@ export type BusinessCategory = {
   updatedAt: string;
   subCategories: SubCategoryType[];
 }
+
+export type User = {
+  email:string,
+  token:string
+}

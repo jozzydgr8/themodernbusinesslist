@@ -32,7 +32,7 @@ export const LoginForm = ()=>{
             </div>
                 <h3>Login</h3>
                     <Form layout="vertical" onFinish={formik.handleSubmit}>
-                        <Form.Item label='email'>
+                        <Form.Item label='Email'>
                             <Input
                             name="email"
                             value={formik.values.email}
@@ -40,8 +40,8 @@ export const LoginForm = ()=>{
                             required/>
                         </Form.Item>
 
-                        <Form.Item>
-                            <Input
+                        <Form.Item label='Password'>
+                            <Input.Password
                             name="password"
                             value={formik.values.password}
                             onChange={formik.handleChange}/>
