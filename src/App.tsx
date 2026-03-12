@@ -14,6 +14,32 @@ function App() {
   const {user, dispatch:userDispatch, loading:userLoading} = UseAuthContext();
 
   //useEffect for authentication
+  useEffect(() => {
+  userDispatch({ type: 'loading', payload: true });
+
+  const data = localStorage.getItem('user');
+  if (data) {
+    try {
+      const parsed = JSON.parse(data);
+      const now = new Date().getTime();
+      const expiryDays = 3;
+      const expiryTime = expiryDays * 24 * 60 * 60 * 1000; // days to ms
+
+      if (now - parsed.savedAt < expiryTime) {
+        // Not expired
+        userDispatch({ type: 'getUser', payload: parsed.user });
+      } else {
+        // Expired
+        localStorage.removeItem('user');
+      }
+    } catch (e) {
+      console.error('Failed to parse user data:', e);
+      localStorage.removeItem('user');
+    }
+  }
+
+  userDispatch({ type: 'loading', payload: false });
+}, []);
   //fetch or check country
  useEffect(() => {
   dispatch({type:'setloading', payload:true});
@@ -168,7 +194,7 @@ useEffect(() => {
 
   
 //load 
-   if(loading){
+   if(loading || userLoading){
     return <Loading/>
   }
 

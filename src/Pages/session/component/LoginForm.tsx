@@ -4,17 +4,19 @@ import { CloseOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { FlatButton } from "../../../shared/FlatButton";
 import { useState } from "react";
+import { AuthHooks } from "../../../Hooks/AuthHooks";
 
 export const LoginForm = ()=>{
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const { signInWithEmailAndPassword } = AuthHooks();
     return(
         <Formik 
             initialValues={{
                 email:'',
                 password:''
             }} 
-            onSubmit={(values)=>console.log(values)}>
+            onSubmit={(values)=>signInWithEmailAndPassword({...values, setLoading})}>
 
         {formik=>{
          return(
@@ -49,7 +51,7 @@ export const LoginForm = ()=>{
                             onChange={formik.handleChange}/>
                         </Form.Item>
 
-                        <FlatButton title="submit" onClick={()=>formik.handleSubmit()} className="btn btnPrimary" disabled={loading}/>
+                        <FlatButton title="submit" onClick={formik.handleSubmit} className="btn btnPrimary" disabled={loading}/>
                     </Form>
                 </div>
                 )

@@ -26,7 +26,7 @@ export const Session = ()=>{
           }}>
         
        
-            <img src={businessLogo} alt="themodernlist logo" style={{width:"20%"}}/>
+            <img src={businessLogo} alt="themodernlist logo" style={{width:"50%"}}/>
         
         {
             newUser ? <CreateAcctForm/> : <LoginForm/>
