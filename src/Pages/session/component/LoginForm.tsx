@@ -35,7 +35,7 @@ export const LoginForm = ()=>{
               />
             </div>
                 <h3>Login</h3>
-                    <Form layout="vertical" onFinish={formik.handleSubmit}>
+                    <Form layout="vertical" onFinish={formik.handleSubmit} autoComplete="off">
                         <Form.Item label='Email'>
                             <Input
                             name="email"

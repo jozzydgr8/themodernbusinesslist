@@ -125,15 +125,15 @@ nav .container-fluid{
   background: none;
   color:inherit;
 }
-.btnPrimary{
+.btnPrimary, .btnPrimary:hover{
   color: white;
   background:var(--color-primary)
 }
-.btnSuccess{
+.btnSuccess, .btnSuccess:hover{
   color: white;
   background-color: var(--color-success);
 }
-.btnDark{
+.btnDark, .btnDark:hover{
   color:white;
   background-color: var(--color-dark);
 }

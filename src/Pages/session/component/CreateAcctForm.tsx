@@ -4,10 +4,12 @@ import { CloseOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { FlatButton } from "../../../shared/FlatButton";
 import { useState } from "react";
+import { AuthHooks } from "../../../Hooks/AuthHooks";
 
 export const CreateAcctForm = ()=>{
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const {signUpWithEmailAndPassword} = AuthHooks(); 
     return(
      
             <Formik 
@@ -15,7 +17,7 @@ export const CreateAcctForm = ()=>{
                 email:'',
                 password:''
             }} 
-            onSubmit={(values)=>console.log(values)}>
+            onSubmit={(values)=>signUpWithEmailAndPassword({...values,setLoading})}>
                 {formik=>{
                     return(
                         <div style={{ maxWidth: "600px", width: "100%" }}>
@@ -32,7 +34,7 @@ export const CreateAcctForm = ()=>{
                         />
                         </div>
                         <h3>Create Account</h3>
-                        <Form layout="vertical" onFinish={formik.handleSubmit}>
+                        <Form layout="vertical" onFinish={formik.handleSubmit} autoComplete="off">
                             <Form.Item label='Email'>
                                 <Input
                                 name="email"
@@ -48,7 +50,7 @@ export const CreateAcctForm = ()=>{
                                 onChange={formik.handleChange}/>
                             </Form.Item>
 
-                            <FlatButton disabled={loading} title="submit" onClick={()=>formik.handleSubmit()} className="btn btnPrimary"/>
+                            <FlatButton disabled={loading} title="submit" onClick={formik.handleSubmit} className="btn btnPrimary"/>
                         </Form>
                         </div>
                     )

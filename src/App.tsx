@@ -8,6 +8,10 @@ import { UseAuthContext } from './context/UseAuthContext';
 import { Loading } from './shared/Loading';
 import { BrowseCategory } from './Pages/BrowseCategoryPage/BrowseCategory';
 import { Session } from './Pages/session/Session';
+import { MyBusiness } from './My business/MyBusiness';
+import { ProtectedRoutes } from './shared/ProtectedRoutes';
+import { ToastContainer } from 'react-toastify';
+import { GuestRoutes } from './shared/GuestRoutes';
 
 function App() {
   const {loading, dispatch} = UseDataContext();
@@ -39,7 +43,7 @@ function App() {
   }
 
   userDispatch({ type: 'loading', payload: false });
-}, []);
+}, [userDispatch]);
   //fetch or check country
  useEffect(() => {
   dispatch({type:'setloading', payload:true});
@@ -202,13 +206,25 @@ useEffect(() => {
     <Route path='/' element={<Layout/>}>
       <Route index element={<Home/>} />
       <Route path='categories' element={<BrowseCategory/>}/>
-      <Route path='session' element={<Session/>}/>
+      <Route path='session' element={<GuestRoutes user={user}><Session/></GuestRoutes>}/>
+      <Route path='myBusiness' element={<ProtectedRoutes user={user}><MyBusiness/></ProtectedRoutes>}/>
 
     </Route>
   ))
   return (
     <div className="App">
       <RouterProvider router={router}/>
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

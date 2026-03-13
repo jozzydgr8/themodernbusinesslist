@@ -29,6 +29,7 @@ export const AuthHooks = ()=>{
         });
         
         const json = await response.json();
+        console.log(json);
         if (!response.ok) {
             throw new Error(json.error || 'Failed to sign in');
         }
@@ -44,7 +45,40 @@ export const AuthHooks = ()=>{
         }
     }
 
+    const signUpWithEmailAndPassword = async ({email,password, setLoading}:sessionProps)=>{
+        setLoading(true);
+        try{
+            console.log(email,password)
+            const response = await fetch('https://modernbusinesslistserver.vercel.app/user/createuser',{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                email,
+                password
+            })
+            
+        });
+        
+        const json = await response.json();
+        console.log(json)
+        if (!response.ok) {
+            throw new Error(json.error || 'Failed to sign in');
+        }
+        saveUserToLocalStorage(json);
+        
+        dispatch({type:'getUser', payload:json});
+        
+        }catch(error){
+            console.error(error || 'problem signing up')
+        }finally{
+            setLoading(false)
+        }
+    }
+
     return{
-        signInWithEmailAndPassword
+        signInWithEmailAndPassword,
+        signUpWithEmailAndPassword
     }
 }
