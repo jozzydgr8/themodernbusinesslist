@@ -208,7 +208,7 @@ useEffect(() => {
       <Route index element={<Home/>} />
       <Route path='categories' element={<Outlet/>}>
         <Route index element={<BrowseCategory/>} />
-        <Route path=':id/business' element={<BusinessListing/>}/>
+        <Route path=':catId/:id/business' element={<BusinessListing/>}/>
       </Route>
       <Route path='session' element={<GuestRoutes user={user}><Session/></GuestRoutes>}/>
       <Route path='myBusiness' element={<ProtectedRoutes user={user}><MyBusiness/></ProtectedRoutes>}/>
