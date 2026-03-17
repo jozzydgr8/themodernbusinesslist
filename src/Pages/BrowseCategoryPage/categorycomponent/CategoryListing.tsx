@@ -13,7 +13,7 @@ export const CategoryListing = ()=>{
                             <div className="row">
                                 {
                                 cat.subCategories.map(sub=>(
-                                    <NavLink to={'/'} className="col-md-4 col-sm-6 col-xs-12" key={sub._id}>
+                                    <NavLink to={`/categories/${sub._id}/business`} className="col-md-4 col-sm-6 col-xs-12" key={sub._id}>
                                         <div className='container-listing'>
                                         <div>{sub.name}</div>
                                         <div className="container-listing-count">

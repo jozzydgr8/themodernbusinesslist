@@ -1,5 +1,5 @@
 
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider } from 'react-router-dom';
 import { Layout } from './Layout';
 import { Home } from './Pages/homePage/Home';
 import { useEffect } from 'react';
@@ -12,6 +12,7 @@ import { MyBusiness } from './My business/MyBusiness';
 import { ProtectedRoutes } from './shared/ProtectedRoutes';
 import { ToastContainer } from 'react-toastify';
 import { GuestRoutes } from './shared/GuestRoutes';
+import { BusinessListing } from './Pages/BusinessPage/BusinessListing';
 
 function App() {
   const {loading, dispatch} = UseDataContext();
@@ -205,7 +206,10 @@ useEffect(() => {
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
       <Route index element={<Home/>} />
-      <Route path='categories' element={<BrowseCategory/>}/>
+      <Route path='categories' element={<Outlet/>}>
+        <Route index element={<BrowseCategory/>} />
+        <Route path=':id/business' element={<BusinessListing/>}/>
+      </Route>
       <Route path='session' element={<GuestRoutes user={user}><Session/></GuestRoutes>}/>
       <Route path='myBusiness' element={<ProtectedRoutes user={user}><MyBusiness/></ProtectedRoutes>}/>
 
