@@ -2,56 +2,67 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 
 interface Business {
-  _id: string;  
+  _id: string;
   name: string;
   description?: string;
-
-  // Owner
-  user: string; // ObjectId as string
-
-  // Location
+  user: string;
   country: string;
   state: string;
-
   address?: string;
   city?: string;
-
-  // Category
   subCategoryId: string;
-
   phone: string;
   email?: string;
   website?: string;
-
   logo?: string;
-
   isVerified: boolean;
 }
 
-export const BusinessListing  = ()=>{
-    const {id, catId} = useParams();
-    const [data, setData] = useState<Business[]>([])
-    useEffect(()=>{
-        const getBusinesses = async ()=>{
-            const res = await fetch(`https://modernbusinesslistserver.vercel.app/categories/${catId}/subCategories/${id}/business`);
-            if (!res.ok) {
-                throw new Error("error fetching categories");
-            }
-
-            const json = await res.json();
-            setData(json);
-        }
-        getBusinesses();
-    },[id, catId])
-    return(
-        <>
-            {
-                data.map(data=>(
-                    <div key={data._id}>
-                        {data.name}
-                    </div>
-                ))
-            }
-        </>
-    )
+interface BusinessResponse {
+  data: Business[];
+  total: number;
+  country:string;
 }
+export const BusinessListing = () => {
+  const { id, catId } = useParams();
+  const [data, setData] = useState<BusinessResponse | null>(null);
+  
+  
+ useEffect(() => {
+  const getBusinesses = async () => {
+    try {
+      let countryId = ""; // declare here
+      const cached = localStorage.getItem('businesslistcountry');
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          countryId = parsed.countryId;
+        } catch (err) {
+          console.warn("Failed to parse cached country:", err);
+        }
+      }
+
+      const res = await fetch(
+        `https://modernbusinesslistserver.vercel.app/categories/${catId}/subCategories/${id}/${countryId}/business`
+      );
+      if (!res.ok) throw new Error("error fetching categories");
+
+      const json = await res.json();
+      console.log(json)
+      setData(json);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  getBusinesses();
+}, [id, catId]);
+
+  return (
+    <>
+      {data?.data.map((item) => (
+        <div key={item._id}>{item.name}</div>
+      ))}
+    </>
+  );
+};

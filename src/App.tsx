@@ -45,40 +45,45 @@ function App() {
 
   userDispatch({ type: 'loading', payload: false });
 }, [userDispatch]);
-  //fetch or check country
+  //fetch or check name
  useEffect(() => {
   dispatch({type:'setloading', payload:true});
   const getCountry = async () => {
     
     try {
-      let countryId;
+      let countryData = null; // will hold { countryId, name }
 
-      const cachedId = localStorage.getItem("businesslistcountry");
+const cached = localStorage.getItem("businesslistcountry");
 
-      if (cachedId) {
-        countryId = JSON.parse(cachedId);
-      } else {
-        const fetchCountry = await fetch(
-          "https://modernbusinesslistserver.vercel.app/getCountry"
-        );
+if (cached) {
+  try {
+    countryData = JSON.parse(cached);
+  } catch (err) {
+    console.warn("Failed to parse cached name:", err);
+  }
+}
 
-        const json = await fetchCountry.json();
-        const { countryId: fetchedCountryId } = json;
+if (!countryData) {
+  try {
+    const res = await fetch("https://modernbusinesslistserver.vercel.app/getCountry");
+    const json = await res.json();
+    const { countryId, name } = json;
 
-        if (!fetchedCountryId) {
-          console.warn("No countryId returned");
-          return;
-        }
+    if (!countryId) {
+      console.warn("No countryId returned");
+    } else {
+      countryData = { countryId, name };
+      localStorage.setItem("businesslistcountry", JSON.stringify(countryData));
+    }
+  } catch (err) {
+    console.error("Failed to fetch name:", err);
+  }
+}
 
-        countryId = fetchedCountryId;
-
-        // cache it
-        localStorage.setItem("businesslistcountry", JSON.stringify(countryId));
-      }
-
+// countryData now safely contains { countryId, name } or null
       // fetch states
       const stateRes = await fetch(
-        `https://modernbusinesslistserver.vercel.app/countries/${countryId}/states`
+        `https://modernbusinesslistserver.vercel.app/countries/${countryData.countryId}/states`
       );
 
       if (!stateRes.ok) {
