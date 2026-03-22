@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from "react-router-dom";
+import { Loading } from '../../shared/Loading';
 
 interface Business {
   _id: string;
@@ -22,47 +23,61 @@ interface BusinessResponse {
   data: Business[];
   total: number;
   country:string;
+  limit:number;
+  subcategory:string
 }
+
+
 export const BusinessListing = () => {
   const { id, catId } = useParams();
-  const [data, setData] = useState<BusinessResponse | null>(null);
-  
-  
- useEffect(() => {
+
   const getBusinesses = async () => {
-    try {
-      let countryId = ""; // declare here
-      const cached = localStorage.getItem('businesslistcountry');
-      if (cached) {
-        try {
-          const parsed = JSON.parse(cached);
-          countryId = parsed.countryId;
-        } catch (err) {
-          console.warn("Failed to parse cached country:", err);
-        }
+    let countryId = "";
+
+    const cached = localStorage.getItem('businesslistcountry');
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        countryId = parsed.countryId;
+      } catch (err) {
+        console.warn("Failed to parse cached country:", err);
       }
-
-      const res = await fetch(
-        `https://modernbusinesslistserver.vercel.app/categories/${catId}/subCategories/${id}/${countryId}/business`
-      );
-      if (!res.ok) throw new Error("error fetching categories");
-
-      const json = await res.json();
-      console.log(json)
-      setData(json);
-    } catch (err) {
-      console.error(err);
     }
+
+    const res = await fetch(
+      `https://modernbusinesslistserver.vercel.app/categories/${catId}/subCategories/${id}/${countryId}/business`
+    );
+
+    if (!res.ok) throw new Error("error fetching businesses");
+
+    return res.json(); // ✅ IMPORTANT
   };
 
-  getBusinesses();
-}, [id, catId]);
+  const { data, isLoading, error } = useQuery<BusinessResponse>({
+    queryKey: ['business', id, catId], // ✅ include params
+    queryFn: getBusinesses,
+    enabled: !!id && !!catId, // ✅ prevent undefined calls
+  });
+
+  if (isLoading) return <Loading/>;
+  if (error) return <p>Error loading businesses</p>;
 
   return (
-    <>
-      {data?.data.map((item) => (
-        <div key={item._id}>{item.name}</div>
-      ))}
-    </>
+    <section>
+      <div className="container-fluid">
+        <h2>
+          Top {data?.limit} {data?.subcategory} in {data?.country}
+        </h2>
+        <p>
+          We found {data?.total} listings in {data?.country}
+        </p>
+
+        <div>
+          {data?.data?.map((item) => (
+            <div key={item._id}>{item.name}</div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
