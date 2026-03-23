@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from "react-router-dom";
-import { Loading } from '../../shared/Loading';
-
+import {UseDataContext} from '../../context/UseDataContext'
+import { FlatButton } from '../../shared/FlatButton';
+import {PhoneFilled, MailFilled, GlobalOutlined, UserOutlined, MailOutlined} from '@ant-design/icons'
 interface Business {
   _id: string;
   name: string;
@@ -17,6 +18,7 @@ interface Business {
   website?: string;
   logo?: string;
   isVerified: boolean;
+  tagline?:string;
 }
 
 interface BusinessResponse {
@@ -30,8 +32,9 @@ interface BusinessResponse {
 
 export const BusinessListing = () => {
   const { id, catId } = useParams();
-
+  const {dispatch} = UseDataContext();
   const getBusinesses = async () => {
+    
     let countryId = "";
 
     const cached = localStorage.getItem('businesslistcountry');
@@ -51,15 +54,16 @@ export const BusinessListing = () => {
     if (!res.ok) throw new Error("error fetching businesses");
 
     return res.json(); // ✅ IMPORTANT
+    
   };
 
   const { data, isLoading, error } = useQuery<BusinessResponse>({
     queryKey: ['business', id, catId], // ✅ include params
     queryFn: getBusinesses,
-    enabled: !!id && !!catId, // ✅ prevent undefined calls
+    enabled: !!id && !!catId,
+    staleTime: 1000 * 60 * 5,  // ✅ prevent undefined calls
   });
 
-  if (isLoading) return <Loading/>;
   if (error) return <p>Error loading businesses</p>;
 
   return (
@@ -69,12 +73,32 @@ export const BusinessListing = () => {
           Top {data?.limit} {data?.subcategory} in {data?.country}
         </h2>
         <p>
-          We found {data?.total} listings in {data?.country}
+          We found <b>{data?.total}</b> listings in {data?.country}
         </p>
 
         <div>
           {data?.data?.map((item) => (
-            <div key={item._id}>{item.name}</div>
+            <div key={item._id}>
+              <div>
+                <div>
+                  <h3>{item.name}</h3>
+                  <small>{item.address}</small>
+                  <p>{item?.tagline}</p>
+                  <div>
+                    <div>
+                      {item.phone}
+                    </div>
+                    <div><MailOutlined/> {item.email}</div>
+                    <div>{item.website && <GlobalOutlined/>}</div>
+                  </div>
+                  </div>
+              </div>
+
+              <div>
+                <FlatButton title='view profile'/>
+                <FlatButton title='send Enquiry'/>
+              </div>
+            </div>
           ))}
         </div>
       </div>
