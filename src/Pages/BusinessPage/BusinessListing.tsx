@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from "react-router-dom";
-import {UseDataContext} from '../../context/UseDataContext'
 import { FlatButton } from '../../shared/FlatButton';
-import {PhoneFilled, MailFilled, GlobalOutlined, UserOutlined, MailOutlined} from '@ant-design/icons'
+import {PhoneFilled, MailFilled, GlobalOutlined, UserOutlined, MailOutlined} from '@ant-design/icons';
+import { Loading } from '../../shared/Loading';
 interface Business {
   _id: string;
   name: string;
@@ -32,7 +32,6 @@ interface BusinessResponse {
 
 export const BusinessListing = () => {
   const { id, catId } = useParams();
-  const {dispatch} = UseDataContext();
   const getBusinesses = async () => {
     
     let countryId = "";
@@ -58,11 +57,14 @@ export const BusinessListing = () => {
   };
 
   const { data, isLoading, error } = useQuery<BusinessResponse>({
-    queryKey: ['business', id, catId], // ✅ include params
+    queryKey: ['business', id, catId], 
     queryFn: getBusinesses,
     enabled: !!id && !!catId,
-    staleTime: 1000 * 60 * 5,  // ✅ prevent undefined calls
+
   });
+  if (isLoading){
+  return <Loading/>
+  }
 
   if (error) return <p>Error loading businesses</p>;
 

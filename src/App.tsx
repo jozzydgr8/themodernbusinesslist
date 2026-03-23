@@ -13,21 +13,11 @@ import { ProtectedRoutes } from './shared/ProtectedRoutes';
 import { ToastContainer } from 'react-toastify';
 import { GuestRoutes } from './shared/GuestRoutes';
 import { BusinessListing } from './Pages/BusinessPage/BusinessListing';
-import { useIsFetching } from '@tanstack/react-query';
 
 function App() {
   const {loading, dispatch} = UseDataContext();
   const {user, dispatch:userDispatch, loading:userLoading} = UseAuthContext();
-  const isFetching = useIsFetching();
-  const isLoading = isFetching > 0;
-  //useeffect for tanstackquery loading 
- 
-useEffect(() => {
-  dispatch({
-    type: 'setloading',
-    payload: isLoading,
-  });
-}, [isLoading, dispatch]);
+
   //useEffect for authentication
   useEffect(() => {
   userDispatch({ type: 'loading', payload: true });
@@ -214,7 +204,7 @@ useEffect(() => {
 
   
 //load 
-   if(loading || userLoading ){
+   if(loading || userLoading){
     return <Loading/>
   }
 

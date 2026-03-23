@@ -9,15 +9,7 @@ import { ContextAuth } from './context/AuthContext';import { QueryClient, QueryC
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-    },
-  },
-})
+const queryClient = new QueryClient()
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
