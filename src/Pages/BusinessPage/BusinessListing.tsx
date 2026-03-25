@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { FlatButton } from '../../shared/FlatButton';
 import {
   PhoneFilled,
@@ -8,7 +8,8 @@ import {
   EnvironmentFilled
 } from '@ant-design/icons';
 import { Loading } from '../../shared/Loading';
-import { Col, Row } from 'antd';
+import businessLogog from '../../assets/businessLogo.png'
+
 
 // ================= TYPES =================
 interface Business {
@@ -40,7 +41,7 @@ interface BusinessResponse {
 // ================= FETCH FUNCTION =================
 const fetchBusinesses = async (
   catId?: string,
-  id?: string
+  parentId?: string
 ): Promise<BusinessResponse> => {
   let countryId = "";
 
@@ -56,7 +57,7 @@ const fetchBusinesses = async (
   }
 
   const res = await fetch(
-    `https://modernbusinesslistserver.vercel.app/categories/${catId}/subCategories/${id}/${countryId}/business`
+    `https://modernbusinesslistserver.vercel.app/categories/${catId}/subCategories/${parentId}/${countryId}/business`
   );
 
   if (!res.ok) {
@@ -68,7 +69,7 @@ const fetchBusinesses = async (
 
 // ================= COMPONENT =================
 export const BusinessListing = () => {
-  const { id, catId } = useParams();
+  const { parentId, catId } = useParams();
 
   const {
     data,
@@ -76,9 +77,9 @@ export const BusinessListing = () => {
     isError,
     error
   } = useQuery<BusinessResponse>({
-    queryKey: ['business', catId, id],
-    queryFn: () => fetchBusinesses(catId, id),
-    enabled: !!id && !!catId,
+    queryKey: ['business', catId, parentId],
+    queryFn: () => fetchBusinesses(catId, parentId),
+    enabled: !!parentId && !!catId,
   });
 
   // ================= STATES =================
@@ -125,6 +126,29 @@ export const BusinessListing = () => {
                   padding: '20px'
                 }}
               >
+                {
+                  item.logo && (
+                    <div
+                      className="businessLogo"
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        overflow: "hidden" // keeps image inside rounded corners
+                      }}
+                    >
+                      <img
+                        src={businessLogog}
+                        alt="business logo"
+                        style={{
+                          height: "100%",
+                          width: "100%",
+                          objectFit: "contain" // or "cover" depending on your need
+                        }}
+                      />
+                    </div>
+                  )
+                }
+                                    
                 <h3>{item.name}</h3>
 
                 {item.address && (
@@ -136,7 +160,7 @@ export const BusinessListing = () => {
                 {item.tagline && <p>{item.tagline}</p>}
 
                 <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                  <a href=''>
+                  <a href={`phone:${item.phone}`}>
                     <PhoneFilled /> {item.phone}
                   </a>
 
@@ -167,10 +191,12 @@ export const BusinessListing = () => {
                   marginBottom: '20px'
                 }}
               >
-                <FlatButton
+                <NavLink to={`${item._id}`}>
+                  <FlatButton
                   title="View Profile"
                   className="btn btnPrimary"
                 />
+                </NavLink>
 
                 <FlatButton
                   title="Send Enquiry"

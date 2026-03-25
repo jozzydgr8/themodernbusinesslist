@@ -13,6 +13,7 @@ import { ProtectedRoutes } from './shared/ProtectedRoutes';
 import { ToastContainer } from 'react-toastify';
 import { GuestRoutes } from './shared/GuestRoutes';
 import { BusinessListing } from './Pages/BusinessPage/BusinessListing';
+import { BusinessProfilePage } from './Pages/BusinessPage/BusinessProfilePage';
 
 function App() {
   const {loading, dispatch} = UseDataContext();
@@ -213,7 +214,11 @@ useEffect(() => {
       <Route index element={<Home/>} />
       <Route path='categories' element={<Outlet/>}>
         <Route index element={<BrowseCategory/>} />
-        <Route path=':catId/:id/business' element={<BusinessListing/>}/>
+        <Route path=':catId/:parentId/business' element={<Outlet/>} >
+        <Route index element={<BusinessListing/>}/>
+        <Route path=':businessId' element={<BusinessProfilePage/>}/>
+        </Route>
+        
       </Route>
       <Route path='session' element={<GuestRoutes user={user}><Session/></GuestRoutes>}/>
       <Route path='myBusiness' element={<ProtectedRoutes user={user}><MyBusiness/></ProtectedRoutes>}/>
