@@ -41,7 +41,7 @@ export const Header = ()=>{
                             carry an Execution Verified badge for confirmed delivery.
                         </p>
 
-                        <Row className="headerButton" gutter={[1, 16]}>
+                        <Row className="headerButton" gutter={[40, 12]}>
                         <Col xs={24} sm="auto" lg={10}>
                             <FlatButton
                             className="btn btn-lg btnPrimary"
