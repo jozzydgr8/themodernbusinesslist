@@ -8,27 +8,12 @@ import {
   EnvironmentFilled
 } from '@ant-design/icons';
 import { Loading } from '../../shared/Loading';
-import businessLogog from '../../assets/businessLogo.png'
+import businessLogo from '../../assets/businessLogo.png'
+import {Business} from '../../types'
 
 
 // ================= TYPES =================
-interface Business {
-  _id: string;
-  name: string;
-  description?: string;
-  user: string;
-  country: string;
-  state: string;
-  address?: string;
-  city?: string;
-  subCategoryId: string;
-  phone: string;
-  email?: string;
-  website?: string;
-  logo?: string;
-  isVerified: boolean;
-  tagline?: string;
-}
+
 
 interface BusinessResponse {
   data: Business[];
@@ -137,7 +122,7 @@ export const BusinessListing = () => {
                       }}
                     >
                       <img
-                        src={businessLogog}
+                        src={businessLogo}
                         alt="business logo"
                         style={{
                           height: "100%",
@@ -150,6 +135,7 @@ export const BusinessListing = () => {
                 }
                                     
                 <h3>{item.name}</h3>
+                {item._id}
 
                 {item.address && (
                   <small>

@@ -50,3 +50,20 @@ export type sessionProps={
     password:string,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
+export interface Business {
+  _id: string;
+  name: string;
+  description?: string;
+  user: string;
+  country: string;
+  state: string;
+  address?: string;
+  city?: string;
+  subCategoryId: string;
+  phone: string;
+  email?: string;
+  website?: string;
+  logo?: string;
+  isVerified: boolean;
+  tagline?: string;
+}
