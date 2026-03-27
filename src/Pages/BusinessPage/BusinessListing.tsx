@@ -8,7 +8,6 @@ import {
   EnvironmentFilled
 } from '@ant-design/icons';
 import { Loading } from '../../shared/Loading';
-import businessLogo from '../../assets/businessLogo.png'
 import {Business} from '../../types'
 
 
@@ -122,7 +121,7 @@ export const BusinessListing = () => {
                       }}
                     >
                       <img
-                        src={businessLogo}
+                        src={item.logo}
                         alt="business logo"
                         style={{
                           height: "100%",
@@ -135,7 +134,7 @@ export const BusinessListing = () => {
                 }
                                     
                 <h3>{item.name}</h3>
-                {item._id}
+               
 
                 {item.address && (
                   <small>

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "../../shared/Loading";
 import {Business} from '../../types';
+import { FlatButton } from "../../shared/FlatButton";
 
 // ================= TYPES =================
 interface SingleBusinessResponse {
@@ -76,12 +77,63 @@ export const BusinessProfilePage = () => {
   const business = data.data;
 
   return (
-    <div className="container-fluid">
+    <section>
+      <div className="container-fluid">
       <h2>{business.name},  {business.state}</h2>
       {business.tagline && <q>{business.tagline}</q>}
-      <p>{business.description}</p>
-      <p> {business.state}</p>
+      <p>reviews</p>
+      {
+                  business.logo && (
+                    <div
+                      className="businessLogo"
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        overflow: "hidden" // keeps image inside rounded corners
+                      }}
+                    >
+                      <img
+                        src={business.logo}
+                        alt="business logo"
+                        style={{
+                          height: "100%",
+                          width: "100%",
+                          objectFit: "contain" // or "cover" depending on your need
+                        }}
+                      />
+                    </div>
+                  )
+                }
+                <div>
+                  <p>verified listing</p>
+                  <p>premium member</p>
+                </div>
+      <h3>Company name</h3>
+      <p>{business.name}</p>
+      <h3>Address</h3>
+      <p>{business.address}</p>
       <p>{business.phone}</p>
+     {
+      business.website && (
+        <>
+        <h3>
+        website
+        </h3>
+        <p>{business.website}</p></>
+      )
+     }
+     <div>working hours</div>
+      <p>establishment year</p>
+      <p>employees</p>
+
+      <h3>Email</h3>
+      <div>
+        <FlatButton title="send enquiry"/>
+        <FlatButton title="show email"/>
+      </div>
+      <h3>company description</h3>
+      <p>{business.description}</p>
     </div>
+    </section>
   );
 };
