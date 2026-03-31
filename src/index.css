@@ -170,7 +170,10 @@ nav .container-fluid{
   color: var(--color-focus);
   font-weight: bold;
 }
-
+.headerButton{
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+}
 /* #feature --feature */
 #feature-section h2, #feature-section h6{
   text-align: center;

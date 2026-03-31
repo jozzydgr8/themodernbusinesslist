@@ -3,7 +3,8 @@ import {PlusOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import { TransitionSectionSvg } from "../../../shared/TransitionSectionSvg";
 import { useEffect } from "react";
 import { Row, Col } from 'antd';
-
+import { NavLink } from "react-router-dom";
+import { UseAuthContext } from "../../../context/UseAuthContext";
 export const Header = ()=>{
      useEffect(() => {
     const headerText = document.querySelector('.headerWrite');
@@ -15,6 +16,7 @@ export const Header = ()=>{
     const headerBadge = document.querySelector('.header-badge');
     headerBadge?.classList.add('sectionAnimationDown');
 }, []);
+const {user} = UseAuthContext()
 
     return(
         <section id="header-section">
@@ -41,25 +43,32 @@ export const Header = ()=>{
                             carry an Execution Verified badge for confirmed delivery.
                         </p>
 
-                        <Row className="headerButton" gutter={[40, 12]}>
-                        <Col xs={24} sm="auto" lg={10}>
+                        <Row className="headerButton"gutter={12}>
+                        <Col >
+                            <NavLink to={'/mybusiness'}>
                             <FlatButton
                             className="btn btn-lg btnPrimary"
                             icon={<PlusOutlined />}
-                            title="List your company"
+                            title={user ? 'View Company':'List company'}
                             />
+                            </NavLink>
                         </Col>
 
-                        <Col xs={24} sm="auto" lg={10}>
+                        <Col>
+                            <NavLink to={'/categories'}>
                             <FlatButton
                             className="btn btn-lg btn-dark"
                             icon={<ArrowDownOutlined />}
-                            title="Learn more"
+                            title="View Categories"
                             />
+                            </NavLink>
                         </Col>
                         </Row>
+                      
                         </div>
                     </div>
+                    
+                    
                     
                     
             </div>

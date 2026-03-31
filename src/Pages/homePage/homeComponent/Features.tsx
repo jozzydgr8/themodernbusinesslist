@@ -15,7 +15,7 @@ export const Features = ()=>{
                 <div className="row">
                     {
                         homeFeatures.map((features, index)=>(
-                            <>
+                            
                             <div className="col-md-4 animate-up" key={index} style={{marginBottom:"40px"}}>
                                 <div style={{minHeight:'350px',boxShadow: `0 -4px 6px -1px ${features.color}`, padding:"45px", borderRadius:'20px', background:'#e2e6ea'}}>
                                     {features.icon}
@@ -28,7 +28,7 @@ export const Features = ()=>{
                                 </div>
                                 
                             </div>
-                            </>
+                            
                             
                         ))
                     }

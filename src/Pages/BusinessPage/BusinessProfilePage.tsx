@@ -48,7 +48,7 @@ export const BusinessProfilePage = () => {
     isError,
     error
   } = useQuery<SingleBusinessResponse>({
-    queryKey: ['business', catId, parentId, businessId],
+    queryKey: ['businessProfile', catId, parentId, businessId],
     queryFn: () => fetchBusinessById(catId, parentId, businessId),
     enabled: !!catId && !!parentId && !!businessId,
   });

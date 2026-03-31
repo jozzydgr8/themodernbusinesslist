@@ -40,7 +40,7 @@ export const Process = ()=>{
                 <div className="row offering-container">
                     {
                         homeOffering.map((offering,index)=>(
-                            <div className="col-md-4">
+                            <div className="col-md-4" key={index}>
                                 <div className="offering-content">
                                     <div>
                                         {offering.icon}

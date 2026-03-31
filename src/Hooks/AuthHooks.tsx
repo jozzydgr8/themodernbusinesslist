@@ -1,4 +1,4 @@
-import { sessionProps } from "../types";
+import { sessionProps, User } from "../types";
 import { UseAuthContext } from "../context/UseAuthContext";
 import { toast } from "react-toastify";
 
@@ -77,8 +77,16 @@ export const AuthHooks = ()=>{
         }
     }
 
+     const handleLogOut = (user:User)=>{
+      if (!user){ return}
+        localStorage.removeItem('user');
+        dispatch({type:'logout'});
+        
+     }
+
     return{
         signInWithEmailAndPassword,
-        signUpWithEmailAndPassword
+        signUpWithEmailAndPassword,
+        handleLogOut
     }
 }

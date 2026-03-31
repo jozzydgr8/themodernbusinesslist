@@ -1,10 +1,14 @@
 import businessLogo from '../assets/businessLogo.png'
 import { NavLink } from 'react-router-dom'
 import { FlatButton } from './FlatButton'
+import { UseAuthContext } from '../context/UseAuthContext'
+import {AuthHooks} from '../Hooks/AuthHooks'
 
 
 
 export const Navbar = () => {
+  const {user} = UseAuthContext();
+  const {handleLogOut} = AuthHooks();
  
 
   return (
@@ -32,9 +36,15 @@ export const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to={`/session`} className="nav-link active">
+              {
+                !user ? <NavLink to={`/session`} className="nav-link active">
                     Sign In
-              </NavLink>
+              </NavLink> : <FlatButton className='nav-link' title='sign Out' onClick={()=>{
+                if(!user){
+                  return console.error('user not signed in')
+                };
+                handleLogOut(user)}}/>
+              }
             </li>
             <li className="nav-item">
               <NavLink to={`/categories`} className="nav-link active">
@@ -42,9 +52,15 @@ export const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to={``} className="nav-link">
+              {
+                user ? <NavLink to={`/mybusiness`} className="nav-link">
+                <FlatButton title='View Business' className='btn btnPrimary '/>
+              </NavLink>:
+              <NavLink to={`/mybusiness`} className="nav-link">
                 <FlatButton title='list your business' className='btn btnPrimary '/>
               </NavLink>
+              }
+              
             </li>
 
           </ul>
